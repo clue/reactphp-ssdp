@@ -5,6 +5,7 @@ namespace Clue\React\Ssdp;
 use React\EventLoop\LoopInterface;
 use Clue\React\Multicast\Factory as MulticastFactory;
 use React\Promise\Deferred;
+use RuntimeException;
 
 class Client
 {
