@@ -2,7 +2,7 @@
 
 Async [Simple Service Discovery Protocol (SSDP)](http://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol), built on top of [React PHP](http://reactphp.org/).
 
-As used in [Univeral Plug and Play](http://de.wikipedia.org/wiki/Universal_Plug_and_Play) (UPnP).
+As used in [Universal Plug and Play](http://de.wikipedia.org/wiki/Universal_Plug_and_Play) (UPnP).
 Commonly used by multimedia devices in home networks etc.
 
 See [UPnP device architecture definition](http://upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf) (PDF).
