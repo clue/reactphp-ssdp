@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-class TestCase extends PHPUnit_Framework_TestCase
+class TestCase extends PHPUnit\Framework\TestCase
 {
     protected function expectCallableOnce()
     {
@@ -19,24 +19,14 @@ class TestCase extends PHPUnit_Framework_TestCase
     {
         $mock = $this->createCallableMock();
         $mock
-        ->expects($this->never())
-        ->method('__invoke');
+            ->expects($this->never())
+            ->method('__invoke');
 
         return $mock;
     }
 
-    /**
-     * @link https://github.com/reactphp/react/blob/master/tests/React/Tests/Socket/TestCase.php (taken from reactphp/react)
-     */
     protected function createCallableMock()
     {
-        return $this->getMock('CallableStub');
-    }
-}
-
-class CallableStub
-{
-    public function __invoke()
-    {
+        return $this->getMockBuilder('stdClass')->setMethods(array('__invoke'))->getMock();
     }
 }
