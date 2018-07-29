@@ -1,8 +1,8 @@
 {
     "name": "clue/ssdp-react",
-    "description": "Async Simple Service Discovery Protocol (SSDP), part of Univeral Plug and Play (UPnP)",
-    "keywords": ["Simple Service Discovery Protocol", "SSDP", "Univeral Plug and Play", "UPnP", "ReactPHP", "async"],
-    "homepage": "https://github.com/clue/php-ssdp-react",
+    "description": "Async Simple Service Discovery Protocol (SSDP), built on top of ReactPHP.",
+    "keywords": ["Simple Service Discovery Protocol", "SSDP", "Universal Plug and Play", "UPnP", "ReactPHP", "async"],
+    "homepage": "https://github.com/clue/reactphp-ssdp",
     "license": "MIT",
     "authors": [
         {

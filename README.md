@@ -1,15 +1,17 @@
-# clue/ssdp-react [![Build Status](https://travis-ci.org/clue/php-ssdp-react.svg?branch=master)](https://travis-ci.org/clue/php-ssdp-react)
+# clue/reactphp-ssdp [![Build Status](https://travis-ci.org/clue/reactphp-ssdp.svg?branch=master)](https://travis-ci.org/clue/reactphp-ssdp)
 
-Async [Simple Service Discovery Protocol (SSDP)](http://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol), built on top of [React PHP](http://reactphp.org/).
+Async [Simple Service Discovery Protocol (SSDP)](http://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol), built on top of [ReactPHP](https://reactphp.org/).
 
-As used in [Univeral Plug and Play](http://de.wikipedia.org/wiki/Universal_Plug_and_Play) (UPnP).
-Commonly used by multimedia devices in home networks etc.
+SSDP is part of [Universal Plug and Play (UPnP)](http://de.wikipedia.org/wiki/Universal_Plug_and_Play)
+and is commonly used to discover network services on home networks without
+requiring any manual configuration, such as automatically discovering printers,
+multimedia devices and network routers.
 
-See [UPnP device architecture definition](http://upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf) (PDF).
-Uses Multicast and Unicast UDP HTTP messages (HTTPMU/HTTPU),
-expired IETF draft: https://tools.ietf.org/html/draft-goland-http-udp-01
-
-This is an alternative to DNS-Based Service Discovery (DNS-SD)
+This library implements SSDP as defined in the
+[UPnP device architecture definition](http://upnp.org/specs/arch/UPnP-arch-DeviceArchitecture-v1.1.pdf) (PDF)
+and uses HTTP over Multicast UDP (HTTPMU) as defined in the
+[IETF draft](https://tools.ietf.org/html/draft-goland-http-udp-01).
+As an alternative, some devices use DNS-Based Service Discovery (DNS-SD) instead
 as defined in [RFC 6763](http://tools.ietf.org/html/rfc6763).
 
 **Table of Contents**
