@@ -40,9 +40,10 @@ class Client
             $socket->close();
         });
 
-        $deferred = new Deferred(function () use ($socket, &$timer) {
+        $loop = $this->loop;
+        $deferred = new Deferred(function () use ($socket, &$timer, $loop) {
             // canceling resulting promise cancels timer and closes socket
-            $timer->cancel();
+            $loop->cancelTimer($timer);
             $socket->close();
             throw new RuntimeException('Cancelled');
         });

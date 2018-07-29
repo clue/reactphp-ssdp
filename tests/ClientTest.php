@@ -23,8 +23,13 @@ class ClientTest extends TestCase
         $socket = $this->getMockBuilder('React\Datagram\SocketInterface')->getMock();
         $socket->expects($this->once())->method('send');
 
-        $timer = $this->getMockBuilder('React\EventLoop\Timer\TimerInterface')->getMock();
-        $loop->expects($this->once())->method('addTimer')->will($this->returnValue($timer));
+        // prefer newer EventLoop 1.0/0.5+ TimerInterface or fall back to legacy namespace
+        $timer = $this->getMockBuilder(
+            interface_exists('React\EventLoop\TimerInterface') ? 'React\EventLoop\TimerInterface' : 'React\EventLoop\Timer\TimerInterface'
+        )->getMock();
+
+        $loop->expects($this->once())->method('addTimer')->willReturn($timer);
+        $loop->expects($this->once())->method('cancelTimer')->with($timer);
 
         $multicast->expects($this->once())->method('createSender')->will($this->returnValue($socket));
 
@@ -37,7 +42,6 @@ class ClientTest extends TestCase
         }
 
         $socket->expects($this->once())->method('close');
-        $timer->expects($this->once())->method('cancel');
 
         $promise->cancel();
 
