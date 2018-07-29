@@ -12,6 +12,13 @@ expired IETF draft: https://tools.ietf.org/html/draft-goland-http-udp-01
 This is an alternative to DNS-Based Service Discovery (DNS-SD)
 as defined in [RFC 6763](http://tools.ietf.org/html/rfc6763).
 
+**Table of Contents**
+
+* [Quickstart example](#quickstart-example)
+* [Install](#install)
+* [Tests](#tests)
+* [License](#license)
+
 > Note: This project is in early alpha stage! Feel free to report any issues you encounter.
 
 ## Quickstart example
@@ -51,6 +58,26 @@ The recommended way to install this library is [through composer](http://getcomp
         "clue/ssdp-react": "dev-master"
     }
 }
+```
+
+This project aims to run on any platform and thus does not require any PHP
+extensions and supports running on legacy PHP 5.3 through current PHP 7+ and
+HHVM.
+It's *highly recommended to use PHP 7+* for this project.
+
+## Tests
+
+To run the test suite, you first need to clone this repo and then install all
+dependencies [through Composer](https://getcomposer.org):
+
+```bash
+$ composer install
+```
+
+To run the test suite, go to the project root and run:
+
+```bash
+$ php vendor/bin/phpunit
 ```
 
 ## License

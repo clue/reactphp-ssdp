@@ -5,22 +5,25 @@ use React\EventLoop\Factory;
 
 class ClientTest extends TestCase
 {
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testCtor()
     {
-        $loop = $this->getMock('React\EventLoop\LoopInterface');
+        $loop = $this->getMockBuilder('React\EventLoop\LoopInterface')->getMock();
         new Client($loop);
     }
 
     public function testSearchCancel()
     {
-        $loop = $this->getMock('React\EventLoop\LoopInterface');
+        $loop = $this->getMockBuilder('React\EventLoop\LoopInterface')->getMock();
         $multicast = $this->getMockBuilder('Clue\React\Multicast\Factory')->disableOriginalConstructor()->getMock();
         $client = new Client($loop, $multicast);
 
-        $socket = $this->getMock('React\Datagram\SocketInterface');
+        $socket = $this->getMockBuilder('React\Datagram\SocketInterface')->getMock();
         $socket->expects($this->once())->method('send');
 
-        $timer = $this->getMock('React\EventLoop\Timer\TimerInterface');
+        $timer = $this->getMockBuilder('React\EventLoop\Timer\TimerInterface')->getMock();
         $loop->expects($this->once())->method('addTimer')->will($this->returnValue($timer));
 
         $multicast->expects($this->once())->method('createSender')->will($this->returnValue($socket));
