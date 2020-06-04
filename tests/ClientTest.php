@@ -1,5 +1,7 @@
 <?php
 
+namespace Clue\Tests\React\Ssdp;
+
 use Clue\React\Ssdp\Client;
 use React\EventLoop\Factory;
 
@@ -37,7 +39,7 @@ class ClientTest extends TestCase
 
         $this->assertInstanceOf('React\Promise\PromiseInterface', $promise);
 
-        if (!($promise instanceof React\Promise\CancellablePromiseInterface)) {
+        if (!($promise instanceof \React\Promise\CancellablePromiseInterface)) {
             $this->markTestSkipped();
         }
 
