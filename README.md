@@ -1,4 +1,6 @@
-# clue/reactphp-ssdp [![Build Status](https://travis-ci.org/clue/reactphp-ssdp.svg?branch=master)](https://travis-ci.org/clue/reactphp-ssdp)
+# clue/reactphp-ssdp
+
+[![CI status](https://github.com/clue/reactphp-ssdp/workflows/CI/badge.svg)](https://github.com/clue/reactphp-ssdp/actions)
 
 Async [Simple Service Discovery Protocol (SSDP)](http://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol), built on top of [ReactPHP](https://reactphp.org/).
 
@@ -63,7 +65,7 @@ The recommended way to install this library is [through composer](http://getcomp
 ```
 
 This project aims to run on any platform and thus does not require any PHP
-extensions and supports running on legacy PHP 5.3 through current PHP 7+ and
+extensions and supports running on legacy PHP 5.3 through current PHP 8+ and
 HHVM.
 It's *highly recommended to use PHP 7+* for this project.
 
