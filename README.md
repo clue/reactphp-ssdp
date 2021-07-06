@@ -1,6 +1,7 @@
 # clue/reactphp-ssdp
 
 [![CI status](https://github.com/clue/reactphp-ssdp/workflows/CI/badge.svg)](https://github.com/clue/reactphp-ssdp/actions)
+[![installs on Packagist](https://img.shields.io/packagist/dt/clue/ssdp-react?color=blue&label=installs%20on%20Packagist)](https://packagist.org/packages/clue/ssdp-react)
 
 Async [Simple Service Discovery Protocol (SSDP)](http://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol), built on top of [ReactPHP](https://reactphp.org/).
 
