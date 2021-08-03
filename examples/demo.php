@@ -4,8 +4,7 @@ use Clue\React\Ssdp\Client;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$loop = React\EventLoop\Factory::create();
-$client = new Client($loop);
+$client = new Client();
 
 $client->search()->then(
     function () {
@@ -20,5 +19,3 @@ $client->search()->then(
         echo PHP_EOL;
     }
 );
-
-$loop->run();
