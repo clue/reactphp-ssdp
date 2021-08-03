@@ -2,8 +2,9 @@
 
 namespace Clue\React\Ssdp;
 
-use React\EventLoop\LoopInterface;
 use Clue\React\Multicast\Factory as MulticastFactory;
+use React\EventLoop\Loop;
+use React\EventLoop\LoopInterface;
 use React\Promise\Deferred;
 use RuntimeException;
 
@@ -11,16 +12,26 @@ class Client
 {
     const ADDRESS = '239.255.255.250:1900';
 
+    /** @var LoopInterface */
     private $loop;
+
+    /** @var MulticastFactory */
     private $multicast;
 
-    public function __construct(LoopInterface $loop, MulticastFactory $multicast = null)
+    /**
+     * This class takes an optional `LoopInterface|null $loop` parameter that can be used to
+     * pass the event loop instance to use for this object. You can use a `null` value
+     * here in order to use the [default loop](https://github.com/reactphp/event-loop#loop).
+     * This value SHOULD NOT be given unless you're sure you want to explicitly use a
+     * given event loop instance.
+     *
+     * @param ?LoopInterface $loop
+     * @param ?MulticastFactory $multicast
+     */
+    public function __construct(LoopInterface $loop = null, MulticastFactory $multicast = null)
     {
-        if ($multicast === null) {
-            $multicast = new MulticastFactory($loop);
-        }
-        $this->loop = $loop;
-        $this->multicast = $multicast;
+        $this->loop = $loop ?: Loop::get();
+        $this->multicast = $multicast ?: new MulticastFactory($this->loop);
     }
 
     public function search($searchTarget = 'ssdp:all', $mx = 2)

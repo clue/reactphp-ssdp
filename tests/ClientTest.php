@@ -3,10 +3,21 @@
 namespace Clue\Tests\React\Ssdp;
 
 use Clue\React\Ssdp\Client;
-use React\EventLoop\Factory;
+use React\EventLoop\Loop;
 
 class ClientTest extends TestCase
 {
+    public function testConstructWithoutLoopAssignsLoopAutomatically()
+    {
+        $client = new Client();
+
+        $ref = new \ReflectionProperty($client, 'loop');
+        $ref->setAccessible(true);
+        $loop = $ref->getValue($client);
+
+        $this->assertInstanceOf('React\EventLoop\LoopInterface', $loop);
+    }
+
     /**
      * @doesNotPerformAssertions
      */
@@ -52,12 +63,11 @@ class ClientTest extends TestCase
 
     public function testSearchTimeout()
     {
-        $loop = Factory::create();
-        $client = new Client($loop);
+        $client = new Client();
 
         $promise = $client->search('ssdp:all', 0.01);
 
-        $loop->run();
+        Loop::run();
 
         $promise->then($this->expectCallableOnce(), $this->expectCallableNever(), $this->expectCallableNever());
     }

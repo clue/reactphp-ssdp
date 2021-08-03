@@ -31,8 +31,7 @@ as defined in [RFC 6763](http://tools.ietf.org/html/rfc6763).
 Once [installed](#install), you can use the following code to search all available UPnP devices in your network:
 
 ```php
-$loop = React\EventLoop\Factory::create();
-$client = new Client($loop);
+$client = new Clue\React\Ssdp\Client();
 
 $client->search()->then(
     function () {
@@ -47,8 +46,6 @@ $client->search()->then(
         echo PHP_EOL;
     }
 );
-
-$loop->run();
 ```
 
 See also the [examples](examples).
