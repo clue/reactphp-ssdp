@@ -28,8 +28,14 @@ class Client
      * @param ?LoopInterface $loop
      * @param ?MulticastFactory $multicast
      */
-    public function __construct(LoopInterface $loop = null, MulticastFactory $multicast = null)
+    public function __construct($loop = null, $multicast = null)
     {
+        if ($loop !== null && !$loop instanceof LoopInterface) { // manual type check to support legacy PHP < 7.1
+            throw new \InvalidArgumentException('Argument #1 ($loop) expected null|React\EventLoop\LoopInterface');
+        }
+        if ($multicast !== null && !$multicast instanceof MulticastFactory) { // manual type check to support legacy PHP < 7.1
+            throw new \InvalidArgumentException('Argument #2 ($multicast) expected null|Clue\React\Multicast\Factory');
+        }
         $this->loop = $loop ?: Loop::get();
         $this->multicast = $multicast ?: new MulticastFactory($this->loop);
     }
@@ -46,11 +52,7 @@ class Client
         $socket = $this->multicast->createSender();
         // TODO: The TTL for the IP packet SHOULD default to 2 and SHOULD be configurable.
 
-        $timer = $this->loop->addTimer($mx, function() use ($socket, &$deferred) {
-            $deferred->resolve();
-            $socket->close();
-        });
-
+        $messages = array();
         $loop = $this->loop;
         $deferred = new Deferred(function () use ($socket, &$timer, $loop) {
             // canceling resulting promise cancels timer and closes socket
@@ -59,11 +61,15 @@ class Client
             throw new RuntimeException('Cancelled');
         });
 
-        $that = $this;
-        $socket->on('message', function ($data, $remote) use ($deferred, $that) {
-            $message = $that->parseMessage($data, $remote);
+        $timer = $this->loop->addTimer($mx, function() use ($socket, &$deferred, &$messages) {
+            $deferred->resolve($messages);
+            $socket->close();
+        });
 
-            $deferred->progress($message);
+        $that = $this;
+        $socket->on('message', function ($data, $remote) use (&$messages, $that) {
+            $message = $that->parseMessage($data, $remote);
+            $messages[] = $message;
         });
 
         $socket->send($data, self::ADDRESS);
