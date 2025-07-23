@@ -22,9 +22,9 @@
     },
     "require": {
         "php": ">=5.3",
-        "clue/multicast-react": "^1.0 || ^0.2",
+        "clue/multicast-react": "1.x-dev#f1bd5df0309b9f8b3486b09bf37aedfb042addb6",
         "react/event-loop": "^1.2",
-        "react/promise": "^2.0 || ^1.0"
+        "react/promise": "^3.2 || ^2.7 || ^1.2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.6 || ^5.7 || ^4.8.36"

@@ -46,10 +46,7 @@ class Client
         $socket = $this->multicast->createSender();
         // TODO: The TTL for the IP packet SHOULD default to 2 and SHOULD be configurable.
 
-        $timer = $this->loop->addTimer($mx, function() use ($socket, &$deferred) {
-            $deferred->resolve();
-            $socket->close();
-        });
+        $messages = array();
 
         $loop = $this->loop;
         $deferred = new Deferred(function () use ($socket, &$timer, $loop) {
@@ -59,9 +56,15 @@ class Client
             throw new RuntimeException('Cancelled');
         });
 
+        $timer = $this->loop->addTimer($mx, function() use ($socket, &$deferred, &$messages) {
+        	$deferred->resolve($messages);
+        	$socket->close();
+        });
+
         $that = $this;
-        $socket->on('message', function ($data, $remote) use ($deferred, $that) {
+        $socket->on('message', function ($data, $remote) use (&$messages, $that) {
             $message = $that->parseMessage($data, $remote);
+            $messages[] = $message;
 
             $deferred->progress($message);
         });
