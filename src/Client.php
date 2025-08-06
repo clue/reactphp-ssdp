@@ -28,8 +28,14 @@ class Client
      * @param ?LoopInterface $loop
      * @param ?MulticastFactory $multicast
      */
-    public function __construct(LoopInterface $loop = null, MulticastFactory $multicast = null)
+    public function __construct($loop = null, $multicast = null)
     {
+    	if ($loop !== null && !$loop instanceof LoopInterface) { // manual type check to support legacy PHP < 7.1
+    		throw new \InvalidArgumentException('Argument #1 ($loop) expected null|React\EventLoop\LoopInterface');
+    	}
+    	if ($multicast !== null && !$multicast instanceof MulticastFactory) { // manual type check to support legacy PHP < 7.1
+    		throw new \InvalidArgumentException('Argument #2 ($multicast) expected null|Clue\React\Multicast\Factory');
+    	}
         $this->loop = $loop ?: Loop::get();
         $this->multicast = $multicast ?: new MulticastFactory($this->loop);
     }

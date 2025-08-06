@@ -71,4 +71,32 @@ class ClientTest extends TestCase
 
         $promise->then($this->expectCallableOnce(), $this->expectCallableNever(), $this->expectCallableNever());
     }
+
+    public function testCtorThrowsForInvalidLoop()
+    {
+    	if (method_exists($this, 'expectException')) {
+    		// PHPUnit 5.2+
+    		$this->expectException('InvalidArgumentException');
+    		$this->expectExceptionMessage('Argument #1 ($loop) expected null|React\EventLoop\LoopInterface');
+    	} else {
+    		// legacy PHPUnit
+    		$this->setExpectedException('InvalidArgumentException', 'Argument #1 ($loop) expected null|React\EventLoop\LoopInterface');
+    	}
+
+    	new Client('loop');
+    }
+
+    public function testCtorThrowsForInvalidMulticast()
+    {
+    	if (method_exists($this, 'expectException')) {
+    		// PHPUnit 5.2+
+    		$this->expectException('InvalidArgumentException');
+    		$this->expectExceptionMessage('Argument #2 ($multicast) expected null|Clue\React\Multicast\Factory');
+    	} else {
+    		// legacy PHPUnit
+    		$this->setExpectedException('InvalidArgumentException', 'Argument #2 ($multicast) expected null|Clue\React\Multicast\Factory');
+    	}
+
+    	new Client(null, 'multicast');
+    }
 }
