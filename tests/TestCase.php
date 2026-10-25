@@ -28,10 +28,10 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected function createCallableMock()
     {
         if (method_exists('PHPUnit\Framework\MockObject\MockBuilder', 'addMethods')) {
-            // PHPUnit 9+
+            // PHPUnit 8.5+
             return $this->getMockBuilder('stdClass')->addMethods(array('__invoke'))->getMock();
         } else {
-            // legacy PHPUnit 4 - PHPUnit 8
+            // legacy PHPUnit 4 - PHPUnit 8.4
             return $this->getMockBuilder('stdClass')->setMethods(array('__invoke'))->getMock();
         }
     }
